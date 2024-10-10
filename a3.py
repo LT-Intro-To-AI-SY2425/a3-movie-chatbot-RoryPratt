@@ -209,6 +209,10 @@ def search_pa_list(src: List[str]) -> List[str]:
         if src[:5] == ["what", "movies", "were", "made", "in"]:
             ans = title_by_year(src[5])
             t = True
+    if len(src) == 4:
+        if src[:3] == ["actors", "from", "title:"]:
+            ans = actors_by_title([src[3]])
+            t = True
     if ans == [] and t: return ["No answers"]
     elif ans == [] and not t: return ["I don't understand"]
     return ans
@@ -291,5 +295,8 @@ if __name__ == "__main__":
     assert sorted(
         search_pa_list(["what", "movies", "were", "made", "in", "2020"])
     ) == sorted(["No answers"]), "failed search_pa_list test 3"
+
+    #my assert
+    assert sorted(search_pa_list(["actors", "from", "title:", "jaws"])) == sorted(['roy scheider', 'robert shaw', 'richard dreyfuss', 'lorraine gary', 'murray hamilton']), "failed search_pa_list test 2"
 
     print("All tests passed!")
